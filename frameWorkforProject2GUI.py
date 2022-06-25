@@ -68,6 +68,8 @@ def View_data():
             MessageBox.showinfo("Status", "Data fetched successfully  of student having Id "+Id_data+"")
         except:
             MessageBox.showinfo("Status", "Data  not fetched successfully  of student having Id " + Id_data + " please enter correct data")
+    else:
+        MessageBox.showinfo("Status", "Please enter data")
 
 def admin_Submit():
     Id_data=Id.get()
@@ -119,32 +121,37 @@ def teacher_Submit():
         d4.grid(row=1, column=4, padx=10, pady=10)
         d5 = Label(anx, text='language', font='time 9 bold')
         d5.grid(row=1, column=5, padx=10, pady=10)
-        mydb = mysql.connect(
-            host="localhost",
-            user="root",
-            password="root",
-            database="revathi"
+        try:
+            mydb = mysql.connect(
+                host="localhost",
+                user="root",
+                password="root",
+                database="revathi"
 
-        )
-        mycursor = mydb.cursor()
-        mycursor.execute("select * from subjectmarks where Id = " + Id_data + ";")
-        rows = mycursor.fetchall()
-        mydb.close()
-        num = 2
-        for i in rows:
-            id = Label(anx, text=i[0], font='time 9 bold')
-            id.grid(row=num, column=1, padx=10, pady=10)
-            maths = Label(anx, text=i[1], font='time 9 bold')
-            maths.grid(row=num, column=2, padx=10, pady=10)
-            science = Label(anx, text=i[2], font='time 9 bold')
-            science.grid(row=num, column=3, padx=10, pady=10)
-            social = Label(anx, text=i[3], font='time 9 bold')
-            social.grid(row=num, column=4, padx=10, pady=10)
-            language = Label(anx, text=i[4], font='time 9 bold')
-            language.grid(row=num, column=5, padx=10, pady=10)
+            )
+            mycursor = mydb.cursor()
+            mycursor.execute("select * from subjectmarks where Id = " + Id_data + ";")
+            rows = mycursor.fetchall()
+            mydb.close()
+            num = 2
+            for i in rows:
+                id = Label(anx, text=i[0], font='time 9 bold')
+                id.grid(row=num, column=1, padx=10, pady=10)
+                maths = Label(anx, text=i[1], font='time 9 bold')
+                maths.grid(row=num, column=2, padx=10, pady=10)
+                science = Label(anx, text=i[2], font='time 9 bold')
+                science.grid(row=num, column=3, padx=10, pady=10)
+                social = Label(anx, text=i[3], font='time 9 bold')
+                social.grid(row=num, column=4, padx=10, pady=10)
+                language = Label(anx, text=i[4], font='time 9 bold')
+                language.grid(row=num, column=5, padx=10, pady=10)
+                MessageBox.showinfo("Status", "Marks Data fetched successfully of student having Id "+Id_data+" see new Window")
+                e2_Id.delete(0, END)
+        except:
+            MessageBox.showinfo("Status", "Please Enter valid Data")
+    else:
+        MessageBox.showinfo("Status", "Please Enter the Data")
 
-        MessageBox.showinfo("Status", "Marks Data fetched successfully of student having Id "+Id_data+" see new Window")
-        e2_Id.delete(0, END)
 
 
 frame1=Frame(notebook,width=1000,height=500)
